@@ -7,6 +7,12 @@
     android:background="@drawable/gradient"
     tools:context=".MainActivity">
 
-    
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="150dp"
+        android:background="@drawable/logo1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
