@@ -15,7 +15,7 @@ public class signIn extends AppCompatActivity {
 
     EditText mailTxt,passTxt;
     Button signIn;
-    String usr,pass;
+    String mail, pass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,18 +23,18 @@ public class signIn extends AppCompatActivity {
         mailTxt=findViewById(R.id.mail);
         passTxt=findViewById(R.id.pass);
         signIn=findViewById(R.id.start);
-        usr=mailTxt.getText().toString();
+        mail=mailTxt.getText().toString();
         pass=passTxt.getText().toString();
 
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(usr.isEmpty()==false && pass.isEmpty()==false){
+                if(mail.isEmpty()==false && pass.isEmpty()==false){
                     ProgressDialog mDialog=new ProgressDialog(signIn.this);
                     mDialog.setMessage("Signing In, Please Wait!");
                     mDialog.show();
-                    User user= new User(usr, pass);
+                    User user= new User(mail, pass);
                     //verify user from database
                     //1st if statement for user if it exist or not?
                     //if else for password.....
