@@ -30,7 +30,7 @@ public class signIn extends AppCompatActivity {
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mailTxt.getText().toString().isEmpty()==false && passTxt.getText().toString().isEmpty()==false){
+                if(usr.isEmpty()==false && pass.isEmpty()==false){
                     ProgressDialog mDialog=new ProgressDialog(signIn.this);
                     mDialog.setMessage("Signing In, Please Wait!");
                     mDialog.show();
