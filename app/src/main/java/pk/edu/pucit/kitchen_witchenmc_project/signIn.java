@@ -41,6 +41,7 @@ public class signIn extends AppCompatActivity {
                     //if else for password.....
                     mDialog.dismiss();
                     Toast.makeText(signIn.this,"Signed In Successfully!",Toast.LENGTH_SHORT).show();
+                    //get username from db
                     Intent homeIntent= new Intent(signIn.this, home.class);
                     common.current=user;
                     startActivity(homeIntent);
