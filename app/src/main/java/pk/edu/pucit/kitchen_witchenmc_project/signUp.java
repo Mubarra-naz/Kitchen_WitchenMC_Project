@@ -16,6 +16,7 @@ public class signUp extends AppCompatActivity {
     EditText txtName, txtMail, txtPass;
     String usr,mail, pass;
     Button signUp;
+    DBHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +37,15 @@ public class signUp extends AppCompatActivity {
                 mDialog.show();
                 User user= new User(usr, mail, pass);
         //verify and add data to database
+                Boolean email=db.signIn(mail,pass);
+                if(email==true){
+                    Boolean insert=db.insert(mail,pass);
+                    Toast.makeText(signUp.this,"Signed In Successfully!",Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(signUp.this,"Email Already Exists!",Toast.LENGTH_SHORT).show();
+                }
 
                 mDialog.dismiss();
                 Toast.makeText(signUp.this,"Signed Up Successfully!",Toast.LENGTH_SHORT).show();
