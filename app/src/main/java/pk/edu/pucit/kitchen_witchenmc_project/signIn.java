@@ -16,8 +16,7 @@ import pk.edu.pucit.kitchen_witchenmc_project.model.User;
 import android.database.sqlite.SQLiteDatabase;
 
 public class signIn extends AppCompatActivity {
-   // private  SQLiteDatabase db;
-    //private SharedPreferences spUser;
+
     DBHelper db;
     EditText mailTxt,passTxt;
     Button signIn;
@@ -31,8 +30,6 @@ public class signIn extends AppCompatActivity {
         signIn=findViewById(R.id.start);
         mail=mailTxt.getText().toString();
         pass=passTxt.getText().toString();
-        //spUser=getSharedPreferences("userSp",MODE_PRIVATE);
-       // mailTxt.setText(spUser.getString((getResources().getString(R.string.email))));
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,19 +43,15 @@ public class signIn extends AppCompatActivity {
                     if(email==true){
                         Toast.makeText(signIn.this,"Signed In Successfully!",Toast.LENGTH_SHORT).show();
                     }
+
+                    //else for user existence
                     else
                     {
                         Toast.makeText(signIn.this,"Email Already Exists!",Toast.LENGTH_SHORT).show();
                     }
-                    //verify user from database
-                    //1st if statement for user if it exist or not?
-                    //if else for password.....
-                    //db= openOrCreateDatabase("users",MODE_PRIVATE,null);
-                    //db.execSQL("CREATE TABLE IF NOT EXISTS user" +"(userID INTEGER PRIMARY KEY AUTOINCREMENT, userMail TEXT, userPass TEXT);" );
-                    mDialog.dismiss();
+                     mDialog.dismiss();
                     //Toast.makeText(signIn.this,"Signed In Successfully!",Toast.LENGTH_SHORT).show();
 
-                    //else for user existence
                 }
 
 
