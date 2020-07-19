@@ -24,13 +24,13 @@ public class signIn extends AppCompatActivity {
         mailTxt=findViewById(R.id.mail);
         passTxt=findViewById(R.id.pass);
         signIn=findViewById(R.id.start);
-        mail=mailTxt.getText().toString();
-        pass=passTxt.getText().toString();
 
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mail=mailTxt.getText().toString();
+                pass=passTxt.getText().toString();
                 if(mail.isEmpty()==false && passTxt.getText().toString().isEmpty()==false){
                     ProgressDialog mDialog=new ProgressDialog(signIn.this);
                     mDialog.setMessage("Signing In, Please Wait!");
