@@ -16,4 +16,8 @@
 
     <string name="home_second">Category</string>
     <string name="dish">dish name</string>
+    <string name="view_dishes">VIEW DISHES</string>
+    <string name="price">Price</string>
+    <string name="add_to_cart">ADD TO CART</string>
+    <string name="location">Location</string>
 </resources>
