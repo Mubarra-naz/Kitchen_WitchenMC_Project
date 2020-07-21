@@ -20,7 +20,8 @@ Button signUpBtn, signInBtn;
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent signIn=new Intent(MainActivity.this,signIn.class);
+                startActivity(signIn);
             }
         });
         signUpBtn.setOnClickListener(new View.OnClickListener() {
