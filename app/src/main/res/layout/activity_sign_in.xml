@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/gradient"
+    android:layout_height="match_parent"
+    tools:context=".signIn">
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="70dp"
+        android:id="@+id/img"
+        android:background="@drawable/logo1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"/>
+    <EditText
+        android:inputType="textEmailAddress"
+        android:textColorHint="@android:color/white"
+        android:id="@+id/mail"
+        android:backgroundTint="@android:color/white"
+        android:textColor="@android:color/white"
+        android:hint="@string/email"
+        app:layout_constraintHorizontal_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/img"
+        android:layout_margin="30dp"
+        android:padding="10dp"
+        android:importantForAutofill="no" />
+    <EditText
+        android:inputType="textPassword"
+        android:textColorHint="@android:color/white"
+        android:id="@+id/pass"
+        android:backgroundTint="@android:color/white"
+        android:textColor="@android:color/white"
+        android:hint="@string/pass"
+        app:layout_constraintHorizontal_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/mail"
+        android:layout_margin="30dp"
+        android:padding="10dp"
+        android:importantForAutofill="no"/>
+    <androidx.appcompat.widget.AppCompatButton
+        android:background="@android:color/white"
+        android:textColor="@color/colorPrimary"
+        android:text="@string/signIn"
+        android:id="@+id/start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/pass"
+        android:layout_margin="30dp"
+        android:padding="10dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
