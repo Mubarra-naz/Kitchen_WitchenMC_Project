@@ -17,8 +17,8 @@ public class signIn extends AppCompatActivity {
     EditText mailTxt,passTxt;
     Button signIn;
     String mail, pass;
-    DBHelper db;
-    ProgressDialog mDialog;
+    DBHelper sqldb;
+    ProgressDialog sDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,9 +39,9 @@ public class signIn extends AppCompatActivity {
                     Toast.makeText(signIn.this, "Please enter a valid Email Address", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    mDialog=new ProgressDialog(signIn.this);
-                    mDialog.setMessage("Signing In, Please Wait!");
-                    mDialog.show();
+                    sDialog=new ProgressDialog(signIn.this);
+                    sDialog.setMessage("Signing In, Please Wait!");
+                    sDialog.show();
                     User user= new User(mail, pass);
                     if (signInUsr(user)){
                         //go to home
@@ -54,8 +54,8 @@ public class signIn extends AppCompatActivity {
 
             private boolean signInUsr(User user) {
                 try{
-                    db=new DBHelper(signIn.this);
-                    if (db.signIn(user)){
+                    sqldb=new DBHelper(signIn.this);
+                    if (sqldb.signIn(user)){
                         Toast.makeText(signIn.this,"Signed In Successfully!",Toast.LENGTH_SHORT).show();
                         return true;
                     }
@@ -63,7 +63,7 @@ public class signIn extends AppCompatActivity {
                         Toast.makeText(signIn.this,"Email or password incorrect",Toast.LENGTH_SHORT).show();
 
                     }
-                    mDialog.dismiss();
+                    sDialog.dismiss();
                 }catch (Exception e){
                     Toast.makeText(signIn.this,"Error Occurred Signing in, retry!",Toast.LENGTH_SHORT).show();
                 }

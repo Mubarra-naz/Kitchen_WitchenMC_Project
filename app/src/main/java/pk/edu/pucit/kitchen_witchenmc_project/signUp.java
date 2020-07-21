@@ -3,7 +3,6 @@ package pk.edu.pucit.kitchen_witchenmc_project;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -21,7 +20,6 @@ public class signUp extends AppCompatActivity {
     String usr,mail, pass;
     Button signUp;
     DBHelper db;
-    //SQLiteDatabase mdb=openOrCreateDatabase("KitchenWitchen",null, null, 1);
     ProgressDialog mDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
