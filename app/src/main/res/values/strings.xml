@@ -5,4 +5,5 @@
     <string name="pass">Password</string>
     <string name="signUp">SIGN UP</string>
     <string name="signIn">SIGN IN</string>
+    <string name="link_to_signIn">New here! sign up to continue</string>
 </resources>
