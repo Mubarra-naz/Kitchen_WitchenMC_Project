@@ -55,6 +55,11 @@ public class MainActivity extends AppCompatActivity {
                     sDialog.setMessage("Signing In, Please Wait!");
                     sDialog.show();
                     User user= new User(email, passw);
+                    if(user.getMail()==getString(R.string.admin_mail) && user.getPassword()==getString(R.string.admin_pass))
+                    {
+                        Intent admin_panel=new Intent(MainActivity.this,admin_home.class);
+                        startActivity(admin_panel);
+                    }
                     boolean login=signInUsr(user);
                     sDialog.dismiss();
                     clearForm();
