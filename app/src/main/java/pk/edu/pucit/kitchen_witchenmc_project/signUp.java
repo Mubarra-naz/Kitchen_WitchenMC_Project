@@ -50,7 +50,6 @@ public class signUp extends AppCompatActivity {
                     mDialog.show();
                     User user= new User(usr, mail, pass);
                     //verify and add data to database
-                    db=new DBHelper(signUp.this);
                     signUpUsr(user);
                     clearForm();
                 }
@@ -63,15 +62,19 @@ public class signUp extends AppCompatActivity {
             }
 
             private void signUpUsr(User usr){
-                if (db.signUp(usr)){
-                    Toast.makeText(signUp.this,"Signed Up Successfully!",Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    Toast.makeText(signUp.this,"Email Already Exists!",Toast.LENGTH_SHORT).show();
+                try {
+                    db=new DBHelper(signUp.this);
+                    if (db.signUp(usr)){
+                        Toast.makeText(signUp.this,"Signed Up Successfully!",Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(signUp.this,"Email Already Exists!",Toast.LENGTH_SHORT).show();
 
+                    }
+                    mDialog.dismiss();
+                }catch (Exception e){
+                    Toast.makeText(signUp.this,"Error Occurred Signing Up, retry!",Toast.LENGTH_SHORT).show();
                 }
-                mDialog.dismiss();
-
             }
         });
     }
