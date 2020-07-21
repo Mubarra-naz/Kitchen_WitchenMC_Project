@@ -44,7 +44,7 @@ public class signIn extends AppCompatActivity {
                     sDialog.show();
                     User user= new User(mail, pass);
                     if (signInUsr(user)){
-                        user.setName(db.getUserName(user.getMail()));
+                        user.setName(sqldb.getUserName(user.getMail()));
                         //go to home
                     }
                     clearForm();
