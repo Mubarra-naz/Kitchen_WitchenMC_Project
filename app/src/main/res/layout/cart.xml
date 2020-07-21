@@ -10,7 +10,7 @@
     tools:ignore="MissingConstraints">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/clayout"
+        android:id="@+id/cart_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="20dp">
@@ -41,11 +41,13 @@
                 android:layout_marginStart="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/dish_image"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="wrap_content" />
 
             <TextView
                 android:id="@+id/dish_quantity"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Food Quantity"
                 android:textColor="#0B0B0B"
                 android:textSize="20sp"
@@ -54,6 +56,7 @@
 
             <TextView
                 android:id="@+id/dish_location"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Food Price"
                 android:textColor="#0B0B0B"
@@ -69,6 +72,7 @@
 
     <TextView
         android:id="@+id/total_bill"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Grand Total :"
         android:textColor="#FFFFFF"
