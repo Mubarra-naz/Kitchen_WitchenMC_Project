@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/gradient"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient"
     tools:context=".signIn">
     <ImageView
         android:layout_width="300dp"
@@ -53,5 +53,4 @@
         app:layout_constraintTop_toBottomOf="@id/pass"
         android:layout_margin="30dp"
         android:padding="10dp"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
