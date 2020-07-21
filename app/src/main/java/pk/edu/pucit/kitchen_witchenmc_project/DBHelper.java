@@ -64,6 +64,18 @@ public class DBHelper extends SQLiteOpenHelper{
         cursor.close();
         return isValid;
     }
+    boolean checkPassword(String email, String password){
+        String sql = "SELECT password FROM USERS WHERE email=?";
+        SQLiteDatabase sqlDB = this.getReadableDatabase();
+        Cursor cursor = sqlDB.rawQuery(sql, new String[]{email});
+        boolean isValid = false;
+        while (cursor.moveToNext()){
+            String pass = cursor.getString(0);
+            isValid = password.equals(pass);
+        }
+        cursor.close();
+        return isValid;
+    }
 
     public boolean signUp(User usr){
         if (checkEmail(usr.getMail())){
@@ -79,5 +91,15 @@ public class DBHelper extends SQLiteOpenHelper{
 
         ((SQLiteStatement) statement).executeInsert();
         return true;
+    }
+
+
+    public boolean signIn(User usr){
+        if (checkEmail(usr.getMail())){
+            if (checkPassword(usr.getMail(),usr.getPassword())){
+                return true;
+            }
+        }
+        return false;
     }
 }
