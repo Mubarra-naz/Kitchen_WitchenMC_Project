@@ -49,6 +49,7 @@ public class signUp extends AppCompatActivity {
                     User user= new User(usr, mail, pass);
                     //verify and add data to database
                     signUpUsr(user);
+                    mDialog.dismiss();
                     clearForm();
                 }
             }
@@ -69,7 +70,6 @@ public class signUp extends AppCompatActivity {
                         Toast.makeText(signUp.this,"Email Already Exists!",Toast.LENGTH_SHORT).show();
 
                     }
-                    mDialog.dismiss();
                 }catch (Exception e){
                     Toast.makeText(signUp.this,"Error Occurred Signing Up, retry!",Toast.LENGTH_SHORT).show();
                 }
