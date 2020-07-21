@@ -24,9 +24,9 @@ public class DBHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE USERS(email TEXT PRIMARY KEY , name TEXT, password TEXT)");
-        db.execSQL("CREATE TABLE categories(cat_name TEXT PRIMARY KEY, cat_img TEXT)");
-        db.execSQL("CREATE TABLE dishes(dish_name TEXT PRIMARY KEY, dish_img TEXT, dish_ingr TEXT, dish_loc TEXT, dish_price INT, cat_name TEXT)");
-        db.execSQL("CREATE TABLE cart(item_no INT PRIMARY KEY AUTOINCREMENT, item_name TEXT, item_price INT, item_loc TEXT)");
+        db.execSQL("CREATE TABLE CATEGORIES(cat_name TEXT PRIMARY KEY, cat_img TEXT)");
+        db.execSQL("CREATE TABLE DISHES(dish_name TEXT PRIMARY KEY, dish_img TEXT, dish_ingr TEXT, dish_price INT, cat_name TEXT)");
+        db.execSQL("CREATE TABLE CART(item_no INT PRIMARY KEY AUTOINCREMENT, item_name TEXT, item_price INT)");
         //Toast.makeText(DBHelper.this,"tables done", LENGTH_SHORT).show();
 
     }
