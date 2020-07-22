@@ -4,13 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/gradient"
     android:layout_height="wrap_content"
     android:padding="8dp"
     tools:ignore="MissingConstraints">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cat_layout"
+        android:background="#737177"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
