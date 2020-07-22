@@ -6,14 +6,62 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
     tools:context=".MainActivity">
-
     <ImageView
-        android:layout_width="250dp"
-        android:layout_height="150dp"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="70dp"
+        android:id="@+id/img"
         android:background="@drawable/logo1"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="parent"/>
-
-
+    <EditText
+        android:inputType="textEmailAddress"
+        android:textColorHint="@android:color/white"
+        android:id="@+id/email"
+        android:backgroundTint="@android:color/white"
+        android:textColor="@android:color/white"
+        android:hint="@string/email"
+        app:layout_constraintHorizontal_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/img"
+        android:layout_margin="30dp"
+        android:padding="10dp"
+        android:importantForAutofill="no" />
+    <EditText
+        android:inputType="textPassword"
+        android:textColorHint="@android:color/white"
+        android:id="@+id/psw"
+        android:backgroundTint="@android:color/white"
+        android:textColor="@android:color/white"
+        android:hint="@string/pass"
+        app:layout_constraintHorizontal_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/email"
+        android:layout_margin="30dp"
+        android:padding="10dp"
+        android:importantForAutofill="no"/>
+    <androidx.appcompat.widget.AppCompatButton
+        android:background="@android:color/white"
+        android:textColor="@color/colorPrimary"
+        android:text="@string/signIn"
+        android:id="@+id/strt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/psw"
+        android:layout_margin="30dp"
+        android:padding="10dp"/>
+    <TextView
+        android:id="@+id/btnSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="link to sign in"
+        android:gravity="center"
+        android:layout_margin="30dp"
+        android:padding="10dp"
+        android:textSize="20dp"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/strt"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
