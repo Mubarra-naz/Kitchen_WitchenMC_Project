@@ -12,6 +12,10 @@ public class category {
         this.img = img;
     }
 
+    public category(String name) {
+        this.name=name;
+    }
+
     public String getName() {
         return name;
     }
