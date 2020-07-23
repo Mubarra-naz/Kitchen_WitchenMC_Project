@@ -5,13 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp"
+    android:padding="10dp"
     tools:ignore="MissingConstraints">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cat_layout"
-        android:background="#737177"
+        android:background="@color/cardBg"
         android:layout_width="match_parent"
+        app:cardCornerRadius="20dp"
         android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
