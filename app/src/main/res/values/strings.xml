@@ -21,4 +21,6 @@
     <string name="add_to_cart">ADD TO CART</string>
     <string name="location">Location</string>
     <string name="view_dish">View Dish</string>
+    <string name="inc">+</string>
+    <string name="dec">-</string>
 </resources>
