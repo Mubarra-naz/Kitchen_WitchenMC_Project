@@ -6,13 +6,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
+import pk.edu.pucit.kitchen_witchenmc_project.model.cartItem;
 import pk.edu.pucit.kitchen_witchenmc_project.model.dish;
 
 public class dishView extends AppCompatActivity {
@@ -67,14 +70,15 @@ public class dishView extends AppCompatActivity {
         addCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent cartIntent=new Intent(dishView.this,cartView.class);
-                cartIntent.putExtra("itemName", dishName);
-                cartIntent.putExtra("itemPrice",currDish.getPrice());
-                cartIntent.putExtra("itemQty",counter);
-                startActivity(cartIntent);
+                cartItem item=new cartItem(currDish.getImg(), currDish.getName(),currDish.getPrice(),counter);
+                addToCart(item);
             }
         });
 
+    }
+    private void addToCart(cartItem food){
+
+        Toast.makeText(dishView.this,"Added to cart",Toast.LENGTH_LONG).show();
     }
 
     private dish getDishDetails(String DishName) {
