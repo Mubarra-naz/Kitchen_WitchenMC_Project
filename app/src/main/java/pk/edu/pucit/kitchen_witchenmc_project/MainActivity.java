@@ -55,12 +55,12 @@ public class MainActivity extends AppCompatActivity {
                     sDialog.show();
                     User user= new User(email, passw);
                     //boolean login=signInUsr(user);
-                    sDialog.dismiss();
                     clearForm();
                     user.setName("Ali");
                     Intent homeIntent= new Intent(MainActivity.this, home.class);
                     homeIntent.putExtra("username",user.getName());
                     startActivity(homeIntent);
+                    sDialog.dismiss();
                     finish();
                     //else for user existence
                 }

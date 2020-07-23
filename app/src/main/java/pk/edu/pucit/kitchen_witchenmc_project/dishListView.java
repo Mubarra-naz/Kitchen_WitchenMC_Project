@@ -64,7 +64,7 @@ public class dishListView extends AppCompatActivity implements NavigationView.On
         dish item;
         ArrayList<dish> dish_list=new ArrayList<>();
         for (int i=0;i<10;i++){
-            item=new dish("name"+i, "img"+i, "pkr 5"+i);
+            item=new dish("name"+i, "img"+i, 57);
             dish_list.add(item);
         }
         DishRViewAdapter dishLayout=new DishRViewAdapter(dishListView.this, dish_list);

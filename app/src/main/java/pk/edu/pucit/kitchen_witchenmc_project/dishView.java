@@ -19,10 +19,10 @@ import pk.edu.pucit.kitchen_witchenmc_project.model.cartItem;
 import pk.edu.pucit.kitchen_witchenmc_project.model.dish;
 
 public class dishView extends AppCompatActivity {
-    int counter=0;
+    int counter=1;
     ImageView itemImg;
     Button inc, dec, addCart;
-    TextView itemName, itemDetial, itemPrice, qty;
+    TextView itemName, itemDetial, itemPrice, qty, itemPriceLbl;
     dish currDish;
     String dishName;
     @Override
@@ -33,6 +33,7 @@ public class dishView extends AppCompatActivity {
         itemImg=findViewById(R.id.dish_item_image);
         itemName=findViewById(R.id.dish_item_name);
         itemDetial=findViewById(R.id.dish_item_detail);
+        itemPriceLbl=findViewById(R.id.price_lbl);
         itemPrice=findViewById(R.id.dish_item_price);
         qty=findViewById(R.id.dish_item_quantity);
         inc=findViewById(R.id.btnInc);
@@ -47,7 +48,7 @@ public class dishView extends AppCompatActivity {
         //currDish=getDishDetails(dishName);
         itemName.setText(dishName);
         itemDetial.setText("dhjdkdkldldd");//currDish.getIngredients());
-        itemPrice.setText("pkr 100");//currDish.getPrice());
+        itemPrice.setText("100");//currDish.getPrice().toString());
         Picasso.get().load("sssdfff").into(itemImg);//currDish.getImg()).into(itemImg);
         qty.setText(counter+"");
 
@@ -70,8 +71,12 @@ public class dishView extends AppCompatActivity {
         addCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cartItem item=new cartItem(currDish.getImg(), currDish.getName(),currDish.getPrice(),counter);
-                addToCart(item);
+                cartItem currItem=new cartItem();
+                currItem.setName(currDish.getName());
+                currItem.setPrice(currDish.getPrice());
+                currItem.setPrice(counter);
+                currItem.setImg(currDish.getImg());
+                addToCart(currItem);
             }
         });
 
@@ -83,6 +88,6 @@ public class dishView extends AppCompatActivity {
 
     private dish getDishDetails(String DishName) {
         //get dish data from db and return
-        return new dish(DishName,"xyz","sss","PKR 20");
+        return new dish(DishName,"xyz","sss",20);
     }
 }

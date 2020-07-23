@@ -4,12 +4,19 @@ public class cartItem {
     String name;
     String img;
     int quantity;
-    String price;
-    public cartItem(String img, String name, String price, int counter) {
+    int price;
+    public cartItem(String img, String name, int price, int qtty) {
         this.name = name;
         this.img = img;
-        this.quantity = counter;
+        this.quantity = qtty;
         this.price = price;
+    }
+
+    public cartItem() {
+        this.img=null;
+        this.name=null;
+        this.price=0;
+        this.quantity=0;
     }
 
     public String getName() {
@@ -36,11 +43,11 @@ public class cartItem {
         this.quantity = quantity;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 }

@@ -47,7 +47,7 @@ public class catRViewAdapter extends RecyclerView.Adapter<catRViewAdapter.ViewHo
             @Override
             public void onClick(View v) {
                 selected=cat_items.get(position).getName();
-                Toast.makeText(context,"Opening category"+selected,Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"Opening category "+selected,Toast.LENGTH_SHORT).show();
                 Intent dishListIntent=new Intent(context, dishListView.class);
                 dishListIntent.putExtra("categoryName", selected);
                 context.startActivity(dishListIntent);

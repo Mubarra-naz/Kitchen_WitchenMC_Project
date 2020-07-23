@@ -42,13 +42,13 @@ public class DishRViewAdapter extends RecyclerView.Adapter<DishRViewAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.tv_dname.setText(dish_items.get(position).getName());
-        holder.tv_price.setText(dish_items.get(position).getName());
+        holder.tv_price.setText(Integer.toString(dish_items.get(position).getPrice()));
         Picasso.get().load(dish_items.get(position).getImg()).into(holder.tv_dicon);
         holder.tv_dbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selected=dish_items.get(position).getName();
-                Toast.makeText(context,"Adding "+selected+" to cart",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"Opening "+selected,Toast.LENGTH_SHORT).show();
                 Intent dishIntent=new Intent(context, dishView.class);
                 dishIntent.putExtra("dishName", selected);
                 context.startActivity(dishIntent);
