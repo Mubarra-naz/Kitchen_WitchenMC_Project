@@ -175,7 +175,7 @@ public class DBHelper extends SQLiteOpenHelper{
     }
     //single dishd etail
 
-    public boolean addDish(dish item, String catName){
+    public boolean addDish(dish item){
         if(dishCheck(item)==false) {
             SQLiteDatabase sql = getWritableDatabase();
             String query = "INSERT INTO DISHES VALUES(?,?,?,?,?)";
@@ -334,6 +334,32 @@ public class DBHelper extends SQLiteOpenHelper{
         }
         cursor.close();
         return orderList;
+    }
+
+    public ArrayList<dish> loadDishes() {
+        dish dishItem=new dish();
+        ArrayList<dish> dishes=new ArrayList<>();
+        String sql="SELECT * from DISHES";
+        SQLiteDatabase sqlDB = this.getReadableDatabase();
+        Cursor cursor = sqlDB.rawQuery(sql, new String[]{});
+        while (cursor.moveToNext()){
+            dishItem.setImg(cursor.getString(cursor.getColumnIndex("dish_img")));
+            dishItem.setName(cursor.getString(cursor.getColumnIndex("dish_name")));
+            dishItem.setIngredients(cursor.getString(cursor.getColumnIndex("dish_ingr")));
+            dishItem.setCategoryName(cursor.getString(cursor.getColumnIndex("cat_name")));
+            dishItem.setPrice(cursor.getInt(cursor.getColumnIndex("dish_price")));
+            dishes.add(dishItem);
+        }
+        return dishes;
+    }
+
+    public void removeDish(String name) {
+        SQLiteDatabase db=getWritableDatabase();
+        String query="DELETE FROM DISH WHERE dish_name=?";
+        SQLiteStatement statement = db.compileStatement(query);
+        statement.clearBindings();
+        statement.bindString(1, name);
+        statement.executeUpdateDelete();
     }
 }
 

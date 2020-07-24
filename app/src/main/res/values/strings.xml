@@ -33,4 +33,9 @@
     <string name="dec">-</string>
     <string name="Order">Orders</string>
     <string name="info">Feel free to contact us at</string>
+    <string name="users">Users</string>
+    <string name="dishes">Dishes</string>
+    <string name="categories">Categories</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="category">Category</string>
 </resources>

@@ -16,15 +16,9 @@
             android:id="@+id/nav_users"
             android:icon="@drawable/ic_baseline_people_24"
             android:title="@string/users" />
-    </group>
-    <group>
         <item
-        android:id="@+id/nav_edit_phone"
-        android:icon="@drawable/ic_baseline_phone_24"
-        android:title="Edit Contact"/>
-        <item
-            android:id="@+id/nav_edit_location"
-            android:icon="@drawable/ic_baseline_edit_location_24"
-            android:title="Edit Location"/>
+            android:id="@+id/nav_out"
+            android:icon="@drawable/ic_exit_to_app_24dp"
+            android:title="@string/logout" />
     </group>
 </menu>
