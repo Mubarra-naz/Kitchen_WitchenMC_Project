@@ -22,7 +22,6 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_home" />
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
@@ -32,5 +31,6 @@
         android:padding="@dimen/fab_margin"
         android:backgroundTint="@android:color/white"
         app:srcCompat="@drawable/ic_shopping_cart_24dp" />
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

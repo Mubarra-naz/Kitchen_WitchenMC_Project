@@ -13,13 +13,13 @@
             android:icon="@drawable/ic_shopping_cart_24dp"
             android:title="@string/cart" />
         <item
+            android:id="@+id/nav_order"
+            android:icon="@drawable/ic_exit_to_app_24dp"
+            android:title="@string/Order" />
+        <item
             android:id="@+id/nav_contact"
             android:icon="@drawable/ic_baseline_phone_in_talk_24"
             android:title="Contact Us" />
-        <item
-            android:id="@+id/nav_loc"
-            android:icon="@drawable/ic_baseline_location_on_24"
-            android:title="Our Location" />
         <item
             android:id="@+id/nav_out"
             android:icon="@drawable/ic_exit_to_app_24dp"

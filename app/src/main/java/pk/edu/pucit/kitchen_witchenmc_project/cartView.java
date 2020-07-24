@@ -1,58 +1,54 @@
 package pk.edu.pucit.kitchen_witchenmc_project;
 
+import android.app.DownloadManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Menu;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.navigation.NavigationView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.core.view.GravityCompat;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
+
 import java.util.ArrayList;
 
-import pk.edu.pucit.kitchen_witchenmc_project.model.category;
-import pk.edu.pucit.kitchen_witchenmc_project.viewAdapter.catRViewAdapter;
+import pk.edu.pucit.kitchen_witchenmc_project.model.cartItem;
+import pk.edu.pucit.kitchen_witchenmc_project.viewAdapter.cartRViewAdapter;
 
-public class home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class cartView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    TextView user_name;
     DrawerLayout drawer;
-    RecyclerView menu_recycler;
-    RecyclerView.LayoutManager layoutManager;
+    TextView total,total_price;
     String userNAme;
-    //initialize db
-
+    ConstraintLayout ll;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Menu");
-        setSupportActionBar(toolbar);
-        //initialize db
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent viewCartIntent=new Intent(home.this,cartView.class);
-                startActivity(viewCartIntent);
-            }
-        });
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Cart");
+        setSupportActionBar(toolbar);
+
         drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,drawer,toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -65,31 +61,44 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
             navigationView.setCheckedItem(R.id.nav_menu);
         }
 
-
         //user name setting
         Intent resultIntent=getIntent();
         View headerView=navigationView.getHeaderView(0);
-        user_name=(TextView)headerView.findViewById(R.id.user_name);
-        userNAme=resultIntent.getStringExtra("username");
+        TextView user_name = (TextView) headerView.findViewById(R.id.user_name);
+        userNAme = resultIntent.getStringExtra("username");
         user_name.setText(userNAme);
 
+        RecyclerView cart_recycler=(RecyclerView)findViewById(R.id.menu_RView);
+        RecyclerView.LayoutManager llmanager= new LinearLayoutManager(this);
+        cart_recycler.setLayoutManager(llmanager);
 
-        //menu
-        menu_recycler=(RecyclerView)findViewById(R.id.menu_RView);
-        layoutManager= new LinearLayoutManager(this);
-        menu_recycler.setLayoutManager(layoutManager);
-        loadCart();
-    }
-    private void loadCart() {
-        ArrayList<category> cat_list= new ArrayList<>();
-        category cat_item;
-        for (int i=0;i<500;i++){
-            cat_item=new category("name"+(i+1),"imd"+(i+1));
-            cat_list.add(cat_item);
+        cartItem cItem;
+        int sumPrice=0;
+        ArrayList<cartItem> cart_list=new ArrayList<>();
+        for (int i=0;i<5;i++){
+            sumPrice+=((i+2)*(4+i));//price*qty
+            cItem=new cartItem( "img"+i,"name"+i,4+i, i+2);
+            cart_list.add(cItem);
         }
-        //take category data from db and send to menuRViewAdapter defined below
-        catRViewAdapter adapter=new catRViewAdapter(this, cat_list);
-        menu_recycler.setAdapter(adapter);
+        cartRViewAdapter cartLayout=new cartRViewAdapter(cartView.this, cart_list);
+        cart_recycler.setAdapter(cartLayout);
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setVisibility(View.INVISIBLE);
+
+        ll=findViewById(R.id.total_bottom);
+        ll.setVisibility(View.VISIBLE);
+        total=findViewById(R.id.total_bill);
+        total.setText("Grand total: PKR ");
+        total_price=findViewById(R.id.bill_value);
+        total_price.setText(Integer.toString(sumPrice));
+        Button btn=(Button)findViewById(R.id.place_order_btn);
+        btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Toast.makeText(cartView.this,"Order booked",Toast.LENGTH_SHORT);
+            }
+        });
     }
 
     @Override
@@ -116,28 +125,27 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.nav_menu:
+                Intent homeIntent= new Intent(cartView.this, home.class);
+                homeIntent.putExtra("username",userNAme);
+                startActivity(homeIntent);
                 break;
             case R.id.nav_cart:
-                Intent viewCartIntent=new Intent(home.this,cartView.class);
-                viewCartIntent.putExtra("username",userNAme);
-                startActivity(viewCartIntent);
                 break;
             case R.id.nav_order:
-                Intent viewOrderIntent=new Intent(home.this,orderView.class);
+                Intent viewOrderIntent=new Intent(cartView.this,orderView.class);
                 viewOrderIntent.putExtra("username",userNAme);
                 startActivity(viewOrderIntent);
                 break;
             case R.id.nav_out:
-                Intent signIn= new Intent(home.this, MainActivity.class);
+                Intent signIn= new Intent(cartView.this, MainActivity.class);
                 signIn.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(signIn);
                 break;
             case R.id.nav_contact:
-                Intent viewContacttIntent=new Intent(home.this,contact.class);
+                Intent viewContacttIntent=new Intent(cartView.this,contact.class);
                 viewContacttIntent.putExtra("username",userNAme);
                 startActivity(viewContacttIntent);
                 break;
-
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;

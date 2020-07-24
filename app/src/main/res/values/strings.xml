@@ -23,4 +23,6 @@
     <string name="view_dish">View Dish</string>
     <string name="inc">+</string>
     <string name="dec">-</string>
+    <string name="Order">Orders</string>
+    <string name="info">Feel free to contact us at</string>
 </resources>

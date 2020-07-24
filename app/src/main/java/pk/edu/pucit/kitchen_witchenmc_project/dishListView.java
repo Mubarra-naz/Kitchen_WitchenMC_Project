@@ -2,8 +2,10 @@ package pk.edu.pucit.kitchen_witchenmc_project;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,6 +28,7 @@ import pk.edu.pucit.kitchen_witchenmc_project.viewAdapter.DishRViewAdapter;
 public class dishListView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawer;
+    String userNAme;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +59,13 @@ public class dishListView extends AppCompatActivity implements NavigationView.On
         if (savedInstanceState == null) {
             navigationView.setCheckedItem(R.id.nav_menu);
         }
+        //user name setting
+        Intent resultIntent=getIntent();
+        View headerView=navigationView.getHeaderView(0);
+        TextView user_name = (TextView) headerView.findViewById(R.id.user_name);
+        userNAme=resultIntent.getStringExtra("username");
+        user_name.setText(userNAme);
+
 
         RecyclerView dish_recycler=(RecyclerView)findViewById(R.id.menu_RView);
         RecyclerView.LayoutManager llm= new LinearLayoutManager(this);
@@ -73,23 +83,54 @@ public class dishListView extends AppCompatActivity implements NavigationView.On
 
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.home, menu);
+        return true;
+    }
+    @Override
+    public void onBackPressed(){
+        if(drawer.isDrawerOpen(GravityCompat.START)){
+            drawer.closeDrawer(GravityCompat.START);
+        }else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
+        switch (item.getItemId()){
             case R.id.nav_menu:
+                Intent homeIntent= new Intent(dishListView.this, home.class);
+                homeIntent.putExtra("username",userNAme);
+                startActivity(homeIntent);
                 break;
             case R.id.nav_cart:
-
+                Intent viewCartIntent=new Intent(dishListView.this,cartView.class);
+                viewCartIntent.putExtra("username",userNAme);
+                startActivity(viewCartIntent);
+                break;
+            case R.id.nav_order:
+                Intent viewOrderIntent=new Intent(dishListView.this,orderView.class);
+                viewOrderIntent.putExtra("username",userNAme);
+                startActivity(viewOrderIntent);
                 break;
             case R.id.nav_out:
-
+                Intent signIn= new Intent(dishListView.this, MainActivity.class);
+                signIn.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(signIn);
                 break;
             case R.id.nav_contact:
-
+                Intent viewContacttIntent=new Intent(dishListView.this,contact.class);
+                viewContacttIntent.putExtra("username",userNAme);
+                startActivity(viewContacttIntent);
                 break;
-            case R.id.nav_loc:
-
-                break;
-        }
+            }
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

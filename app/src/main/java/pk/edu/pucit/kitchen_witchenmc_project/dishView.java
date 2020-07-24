@@ -25,6 +25,7 @@ public class dishView extends AppCompatActivity {
     TextView itemName, itemDetial, itemPrice, qty, itemPriceLbl;
     dish currDish;
     String dishName;
+    cartItem currItem;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,11 +72,7 @@ public class dishView extends AppCompatActivity {
         addCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cartItem currItem=new cartItem();
-                currItem.setName(currDish.getName());
-                currItem.setPrice(currDish.getPrice());
-                currItem.setPrice(counter);
-                currItem.setImg(currDish.getImg());
+                currItem=new cartItem("dddd","namex",70,2);//currDish.getImg(),currDish.getName(),currDish.getPrice(),counter);
                 addToCart(currItem);
             }
         });
