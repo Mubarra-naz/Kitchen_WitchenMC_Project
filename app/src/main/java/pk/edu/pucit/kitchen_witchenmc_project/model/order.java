@@ -11,6 +11,11 @@ public class order {
         this.orderStatus = orderStatus;
     }
 
+    public order() {
+        orderStatus=null;
+
+    }
+
     public int getOrderId() {
         return orderId;
     }

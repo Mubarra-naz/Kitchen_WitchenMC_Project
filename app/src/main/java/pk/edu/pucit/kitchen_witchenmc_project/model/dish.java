@@ -4,18 +4,30 @@ public class dish {
     String name;
     String img;
     String ingredients;
-    int price;
+    long price;
+    String categoryName;
 
-    public dish(String name, String img, String ingredients, int price) {
+    public dish(String name, String img, String ingredients, long price, String cat) {
         this.name = name;
         this.img = img;
         this.ingredients = ingredients;
         this.price = price;
+        this.categoryName=cat;
     }
-    public dish(String name, String img, int price){
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public dish(String name, String img, long price, String cat){
         this.name = name;
         this.img = img;
         this.price = price;
+        this.categoryName=cat;
     }
 
     public dish() {
@@ -49,11 +61,11 @@ public class dish {
         this.ingredients = ingredients;
     }
 
-    public int getPrice() {
+    public long getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(long price) {
         this.price = price;
     }
 }

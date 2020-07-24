@@ -27,13 +27,15 @@ import java.util.ArrayList;
 import pk.edu.pucit.kitchen_witchenmc_project.model.category;
 import pk.edu.pucit.kitchen_witchenmc_project.viewAdapter.catRViewAdapter;
 
+import static pk.edu.pucit.kitchen_witchenmc_project.common.common.currentUser;
+
 public class home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     TextView user_name;
     DrawerLayout drawer;
     RecyclerView menu_recycler;
     RecyclerView.LayoutManager layoutManager;
-    String userNAme;
+    DBHelper db;
     //initialize db
 
     @Override
@@ -45,14 +47,6 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
         setSupportActionBar(toolbar);
         //initialize db
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent viewCartIntent=new Intent(home.this,cartView.class);
-                startActivity(viewCartIntent);
-            }
-        });
         drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,drawer,toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -67,26 +61,28 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
 
 
         //user name setting
-        Intent resultIntent=getIntent();
         View headerView=navigationView.getHeaderView(0);
         user_name=(TextView)headerView.findViewById(R.id.user_name);
-        userNAme=resultIntent.getStringExtra("username");
-        user_name.setText(userNAme);
+        user_name.setText(currentUser.getName());
 
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent viewCartIntent=new Intent(home.this,cartView.class);
+                startActivity(viewCartIntent);
+            }
+        });
 
         //menu
         menu_recycler=(RecyclerView)findViewById(R.id.menu_RView);
         layoutManager= new LinearLayoutManager(this);
         menu_recycler.setLayoutManager(layoutManager);
-        loadCart();
+        loadCat();
     }
-    private void loadCart() {
-        ArrayList<category> cat_list= new ArrayList<>();
-        category cat_item;
-        for (int i=0;i<500;i++){
-            cat_item=new category("name"+(i+1),"imd"+(i+1));
-            cat_list.add(cat_item);
-        }
+    private void loadCat() {
+        ArrayList<category> cat_list=new ArrayList<>();
+        cat_list= db.loadCategories();
         //take category data from db and send to menuRViewAdapter defined below
         catRViewAdapter adapter=new catRViewAdapter(this, cat_list);
         menu_recycler.setAdapter(adapter);
@@ -119,12 +115,10 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
                 break;
             case R.id.nav_cart:
                 Intent viewCartIntent=new Intent(home.this,cartView.class);
-                viewCartIntent.putExtra("username",userNAme);
                 startActivity(viewCartIntent);
                 break;
             case R.id.nav_order:
                 Intent viewOrderIntent=new Intent(home.this,orderView.class);
-                viewOrderIntent.putExtra("username",userNAme);
                 startActivity(viewOrderIntent);
                 break;
             case R.id.nav_out:
@@ -134,7 +128,6 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
                 break;
             case R.id.nav_contact:
                 Intent viewContacttIntent=new Intent(home.this,contact.class);
-                viewContacttIntent.putExtra("username",userNAme);
                 startActivity(viewContacttIntent);
                 break;
 

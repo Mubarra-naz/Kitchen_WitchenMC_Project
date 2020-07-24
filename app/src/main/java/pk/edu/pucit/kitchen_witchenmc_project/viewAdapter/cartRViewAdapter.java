@@ -17,11 +17,13 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import pk.edu.pucit.kitchen_witchenmc_project.DBHelper;
 import pk.edu.pucit.kitchen_witchenmc_project.R;
 import pk.edu.pucit.kitchen_witchenmc_project.model.cartItem;
 
 public class cartRViewAdapter extends RecyclerView.Adapter<cartRViewAdapter.ViewHolder> {
     Context context;
+    DBHelper db;
     private ArrayList<cartItem> cart_items;
     String selected="";
 
@@ -41,20 +43,16 @@ public class cartRViewAdapter extends RecyclerView.Adapter<cartRViewAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.tv_item_name.setText(cart_items.get(position).getName());
-        holder.tv_item_price.setText(Integer.toString(cart_items.get(position).getPrice()));
-        holder.tv_item_qty.setText(Integer.toString(cart_items.get(position).getQuantity()));
+        holder.tv_item_price.setText(Long.toString(cart_items.get(position).getPrice()));
+        holder.tv_item_qty.setText(Long.toString(cart_items.get(position).getQuantity()));
         Picasso.get().load(cart_items.get(position).getImg()).into(holder.tv_item_icon);
         holder.tv_cancel_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selected=cart_items.get(position).getName();
-                removeItem(selected);
-                }
-
-            private void removeItem(String selected) {
                 Toast.makeText(context,"Removing "+selected+" from cart",Toast.LENGTH_SHORT).show();
-                //remove from db
-            }
+                db.cancelItem(cart_items.get(position));
+                }
         });
 
     }

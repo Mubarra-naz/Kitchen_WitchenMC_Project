@@ -34,12 +34,14 @@ import java.util.ArrayList;
 import pk.edu.pucit.kitchen_witchenmc_project.model.cartItem;
 import pk.edu.pucit.kitchen_witchenmc_project.viewAdapter.cartRViewAdapter;
 
+import static pk.edu.pucit.kitchen_witchenmc_project.common.common.currentUser;
+
 public class cartView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawer;
     TextView total,total_price;
-    String userNAme;
     ConstraintLayout ll;
+    DBHelper db;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,30 +64,23 @@ public class cartView extends AppCompatActivity implements NavigationView.OnNavi
         }
 
         //user name setting
-        Intent resultIntent=getIntent();
         View headerView=navigationView.getHeaderView(0);
         TextView user_name = (TextView) headerView.findViewById(R.id.user_name);
-        userNAme = resultIntent.getStringExtra("username");
-        user_name.setText(userNAme);
+        user_name.setText(currentUser.getName());
 
         RecyclerView cart_recycler=(RecyclerView)findViewById(R.id.menu_RView);
         RecyclerView.LayoutManager llmanager= new LinearLayoutManager(this);
         cart_recycler.setLayoutManager(llmanager);
 
         cartItem cItem;
-        int sumPrice=0;
-        ArrayList<cartItem> cart_list=new ArrayList<>();
-        for (int i=0;i<5;i++){
-            sumPrice+=((i+2)*(4+i));//price*qty
-            cItem=new cartItem( "img"+i,"name"+i,4+i, i+2);
-            cart_list.add(cItem);
-        }
+        ArrayList<cartItem> cart_list=db.loadCart();
         cartRViewAdapter cartLayout=new cartRViewAdapter(cartView.this, cart_list);
         cart_recycler.setAdapter(cartLayout);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setVisibility(View.INVISIBLE);
 
+        int sumPrice=db.cartSum();
         ll=findViewById(R.id.total_bottom);
         ll.setVisibility(View.VISIBLE);
         total=findViewById(R.id.total_bill);
@@ -96,6 +91,7 @@ public class cartView extends AppCompatActivity implements NavigationView.OnNavi
         btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
+                db.bookOrder();
                 Toast.makeText(cartView.this,"Order booked",Toast.LENGTH_SHORT);
             }
         });
@@ -126,14 +122,12 @@ public class cartView extends AppCompatActivity implements NavigationView.OnNavi
         switch (item.getItemId()){
             case R.id.nav_menu:
                 Intent homeIntent= new Intent(cartView.this, home.class);
-                homeIntent.putExtra("username",userNAme);
                 startActivity(homeIntent);
                 break;
             case R.id.nav_cart:
                 break;
             case R.id.nav_order:
                 Intent viewOrderIntent=new Intent(cartView.this,orderView.class);
-                viewOrderIntent.putExtra("username",userNAme);
                 startActivity(viewOrderIntent);
                 break;
             case R.id.nav_out:
@@ -143,7 +137,6 @@ public class cartView extends AppCompatActivity implements NavigationView.OnNavi
                 break;
             case R.id.nav_contact:
                 Intent viewContacttIntent=new Intent(cartView.this,contact.class);
-                viewContacttIntent.putExtra("username",userNAme);
                 startActivity(viewContacttIntent);
                 break;
         }

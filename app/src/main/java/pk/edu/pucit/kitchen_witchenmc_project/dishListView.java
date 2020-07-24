@@ -25,10 +25,12 @@ import java.util.ArrayList;
 import pk.edu.pucit.kitchen_witchenmc_project.model.dish;
 import pk.edu.pucit.kitchen_witchenmc_project.viewAdapter.DishRViewAdapter;
 
+import static pk.edu.pucit.kitchen_witchenmc_project.common.common.currentUser;
+
 public class dishListView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawer;
-    String userNAme;
+    DBHelper db;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,23 +62,19 @@ public class dishListView extends AppCompatActivity implements NavigationView.On
             navigationView.setCheckedItem(R.id.nav_menu);
         }
         //user name setting
-        Intent resultIntent=getIntent();
         View headerView=navigationView.getHeaderView(0);
         TextView user_name = (TextView) headerView.findViewById(R.id.user_name);
-        userNAme=resultIntent.getStringExtra("username");
-        user_name.setText(userNAme);
+        user_name.setText(currentUser.getName());
 
 
         RecyclerView dish_recycler=(RecyclerView)findViewById(R.id.menu_RView);
         RecyclerView.LayoutManager llm= new LinearLayoutManager(this);
         dish_recycler.setLayoutManager(llm);
 
+        db=new DBHelper(dishListView.this);
+
         dish item;
-        ArrayList<dish> dish_list=new ArrayList<>();
-        for (int i=0;i<10;i++){
-            item=new dish("name"+i, "img"+i, 57);
-            dish_list.add(item);
-        }
+        ArrayList<dish> dish_list=db.loadCategoryDishes(categoryName);
         DishRViewAdapter dishLayout=new DishRViewAdapter(dishListView.this, dish_list);
         dish_recycler.setAdapter(dishLayout);
     }
@@ -107,17 +105,14 @@ public class dishListView extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()){
             case R.id.nav_menu:
                 Intent homeIntent= new Intent(dishListView.this, home.class);
-                homeIntent.putExtra("username",userNAme);
                 startActivity(homeIntent);
                 break;
             case R.id.nav_cart:
                 Intent viewCartIntent=new Intent(dishListView.this,cartView.class);
-                viewCartIntent.putExtra("username",userNAme);
                 startActivity(viewCartIntent);
                 break;
             case R.id.nav_order:
                 Intent viewOrderIntent=new Intent(dishListView.this,orderView.class);
-                viewOrderIntent.putExtra("username",userNAme);
                 startActivity(viewOrderIntent);
                 break;
             case R.id.nav_out:
@@ -127,7 +122,6 @@ public class dishListView extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_contact:
                 Intent viewContacttIntent=new Intent(dishListView.this,contact.class);
-                viewContacttIntent.putExtra("username",userNAme);
                 startActivity(viewContacttIntent);
                 break;
             }

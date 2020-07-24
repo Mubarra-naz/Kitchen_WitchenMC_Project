@@ -3,16 +3,50 @@ package pk.edu.pucit.kitchen_witchenmc_project.model;
 public class cartItem {
     String name;
     String img;
-    int quantity;
-    int price;
-    public cartItem(String img, String name, int price, int qtty) {
+    long quantity;
+    long price;
+    int userId;
+    int status;
+    int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public cartItem() {
+        name=null;
+        img=null;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public cartItem(String img, String name, long price, int qtty, int status, int usrId ) {
         this.name = name;
         this.img = img;
         this.quantity = qtty;
         this.price = price;
+        this.status=status;
+        this.userId=usrId;
     }
 
-    public cartItem() {
+    public cartItem(String img, String name, long price, int qtty) {
         this.img=null;
         this.name=null;
         this.price=0;
@@ -35,19 +69,19 @@ public class cartItem {
         this.img = img;
     }
 
-    public int getQuantity() {
+    public long getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(long quantity) {
         this.quantity = quantity;
     }
 
-    public int getPrice() {
+    public long getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(long price) {
         this.price = price;
     }
 }

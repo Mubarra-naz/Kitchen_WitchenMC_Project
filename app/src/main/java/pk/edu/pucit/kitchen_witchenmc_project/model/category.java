@@ -5,6 +5,8 @@ public class category {
     private String img;
 
     public category() {
+        name=null;
+        img=null;
     }
 
     public category(String name, String img) {

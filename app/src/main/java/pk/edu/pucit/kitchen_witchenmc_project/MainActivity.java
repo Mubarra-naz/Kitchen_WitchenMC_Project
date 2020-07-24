@@ -12,7 +12,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import pk.edu.pucit.kitchen_witchenmc_project.common.common;
 import pk.edu.pucit.kitchen_witchenmc_project.model.User;
+
+import static pk.edu.pucit.kitchen_witchenmc_project.common.common.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -63,20 +66,17 @@ public class MainActivity extends AppCompatActivity {
                     clearForm();
                     if (login) {
                         user.setName(sqldb.getUserName(user.getMail()));
+                        user.setId(sqldb.getUserID(user.getMail()));
+                        currentUser =new User(user.getName(),user.getMail(),user.getPassword());
+                        currentUser.setId(user.getId());
                         //go to home
                     }
-                    //boolean login=signInUsr(user);
                     clearForm();
-                    user.setName("Ali");
                     Intent homeIntent= new Intent(MainActivity.this, home.class);
-                    homeIntent.putExtra("username",user.getName());
                     startActivity(homeIntent);
                     sDialog.dismiss();
                     finish();
-                    //else for user existence
                 }
-
-
             }
             private boolean signInUsr(User user) {
                 try{

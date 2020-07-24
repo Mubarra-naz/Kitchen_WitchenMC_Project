@@ -25,10 +25,12 @@ import java.util.ArrayList;
 import pk.edu.pucit.kitchen_witchenmc_project.model.order;
 import pk.edu.pucit.kitchen_witchenmc_project.viewAdapter.orderRViewAdapter;
 
+import static pk.edu.pucit.kitchen_witchenmc_project.common.common.currentUser;
+
 public class orderView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawer;
-    String userNAme;
+    DBHelper db;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,11 +52,9 @@ public class orderView extends AppCompatActivity implements NavigationView.OnNav
             navigationView.setCheckedItem(R.id.nav_menu);
         }
         //user name setting
-        Intent resultIntent=getIntent();
         View headerView=navigationView.getHeaderView(0);
         TextView user_name = (TextView) headerView.findViewById(R.id.user_name);
-        userNAme=resultIntent.getStringExtra("username");
-        user_name.setText(userNAme);
+        user_name.setText(currentUser.getName());
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setVisibility(View.INVISIBLE);
@@ -63,12 +63,7 @@ public class orderView extends AppCompatActivity implements NavigationView.OnNav
         RecyclerView.LayoutManager llm= new LinearLayoutManager(this);
         order_recycler.setLayoutManager(llm);
 
-        order oitem;
-        ArrayList<order> order_list=new ArrayList<>();
-        for (int i=0;i<10;i++){
-            oitem=new order(10, 10000, "booked");
-            order_list.add(oitem);
-        }
+        ArrayList<order> order_list=db.viewOrders();
         orderRViewAdapter orderLayout=new orderRViewAdapter(orderView.this, order_list);
         order_recycler.setAdapter(orderLayout);
     }
@@ -99,12 +94,10 @@ public class orderView extends AppCompatActivity implements NavigationView.OnNav
         switch (item.getItemId()){
             case R.id.nav_menu:
                 Intent homeIntent= new Intent(orderView.this, home.class);
-                homeIntent.putExtra("username",userNAme);
                 startActivity(homeIntent);
                 break;
             case R.id.nav_cart:
                 Intent viewCartIntent=new Intent(orderView.this,cartView.class);
-                viewCartIntent.putExtra("username",userNAme);
                 startActivity(viewCartIntent);
                 break;
             case R.id.nav_order:
@@ -116,7 +109,6 @@ public class orderView extends AppCompatActivity implements NavigationView.OnNav
                 break;
             case R.id.nav_contact:
                 Intent viewContacttIntent=new Intent(orderView.this,contact.class);
-                viewContacttIntent.putExtra("username",userNAme);
                 startActivity(viewContacttIntent);
                 break;
         }

@@ -18,12 +18,14 @@ import com.squareup.picasso.Picasso;
 import pk.edu.pucit.kitchen_witchenmc_project.model.cartItem;
 import pk.edu.pucit.kitchen_witchenmc_project.model.dish;
 
+import static pk.edu.pucit.kitchen_witchenmc_project.common.common.currentUser;
+
 public class dishView extends AppCompatActivity {
     int counter=1;
     ImageView itemImg;
     Button inc, dec, addCart;
+    DBHelper db;
     TextView itemName, itemDetial, itemPrice, qty, itemPriceLbl;
-    dish currDish;
     String dishName;
     cartItem currItem;
     @Override
@@ -45,13 +47,14 @@ public class dishView extends AppCompatActivity {
         dishName=getDishIntent.getStringExtra("dishName");
 
         //get dish details from db
-        //currDish=new dish();
-        //currDish=getDishDetails(dishName);
+        final dish currDish=db.getDishDetail(dishName);
         itemName.setText(dishName);
-        itemDetial.setText("dhjdkdkldldd");//currDish.getIngredients());
-        itemPrice.setText("100");//currDish.getPrice().toString());
-        Picasso.get().load("sssdfff").into(itemImg);//currDish.getImg()).into(itemImg);
+        itemDetial.setText(currDish.getIngredients());
+        itemPrice.setText(Long.toString(currDish.getPrice()));
+        Picasso.get().load(currDish.getImg()).into(itemImg);
         qty.setText(counter+"");
+
+        db=new DBHelper(dishView.this);
 
         inc.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,19 +75,10 @@ public class dishView extends AppCompatActivity {
         addCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currItem=new cartItem("dddd","namex",70,2);//currDish.getImg(),currDish.getName(),currDish.getPrice(),counter);
-                addToCart(currItem);
+                currItem=new cartItem(currDish.getImg(),currDish.getName(),currDish.getPrice(),counter, 0, currentUser.getId());
+                db.insertCartItem(currItem);
+                Toast.makeText(dishView.this,"Added to cart",Toast.LENGTH_LONG).show();
             }
         });
-
-    }
-    private void addToCart(cartItem food){
-
-        Toast.makeText(dishView.this,"Added to cart",Toast.LENGTH_LONG).show();
-    }
-
-    private dish getDishDetails(String DishName) {
-        //get dish data from db and return
-        return new dish(DishName,"xyz","sss",20);
     }
 }
