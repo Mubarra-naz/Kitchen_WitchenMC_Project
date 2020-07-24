@@ -9,16 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".dishListView"></activity>
-        <activity android:name=".dishView"></activity>
-        <activity android:name=".cartView"></activity>
-        <activity android:name=".contact"></activity>
-        <activity android:name=".orderView"></activity>
-        <activity android:name=".signUp"></activity>
         <activity
-            android:name=".home"
-            android:label="@string/title_activity_home"
+            android:name=".admin_home"
+            android:label="@string/title_activity_admin_home"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".signUp" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

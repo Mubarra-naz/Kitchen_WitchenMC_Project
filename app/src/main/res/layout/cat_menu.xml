@@ -4,29 +4,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-<<<<<<< HEAD
     android:background="@drawable/gradient"
     android:layout_height="wrap_content"
     android:padding="8dp"
+    tools:ignore="MissingConstraints">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cat_layout"
-<<<<<<< HEAD
         android:layout_width="match_parent"
-=======
-        android:background="@color/cardBg"
-        android:layout_width="match_parent"
-        app:cardCornerRadius="10dp"
->>>>>>> master
         android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-<<<<<<< HEAD
             android:padding="12dp"
-=======
->>>>>>> master
             tools:ignore="MissingConstraints">
 
             <ImageView

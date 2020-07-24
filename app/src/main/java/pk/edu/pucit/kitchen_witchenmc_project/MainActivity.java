@@ -12,10 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import pk.edu.pucit.kitchen_witchenmc_project.common.common;
 import pk.edu.pucit.kitchen_witchenmc_project.model.User;
-
-import static pk.edu.pucit.kitchen_witchenmc_project.common.common.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
     TextView signUpLnk;
     String email, passw;
     DBHelper sqldb;
-
     ProgressDialog sDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
         signUpLnk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent signUp=new Intent(MainActivity.this,signUp.class);
                 startActivity(signUp);
             }
@@ -70,18 +65,13 @@ public class MainActivity extends AppCompatActivity {
                     clearForm();
                     if (login) {
                         user.setName(sqldb.getUserName(user.getMail()));
-                        user.setId(sqldb.getUserID(user.getMail()));
-                        currentUser =new User(user.getName(),user.getMail(),user.getPassword());
-                        currentUser.setId(user.getId());
                         //go to home
                     }
-                    clearForm();
-                    Intent homeIntent= new Intent(MainActivity.this, home.class);
-                    startActivity(homeIntent);
-                    sDialog.dismiss();
-                    finish();
                 }
+
+
             }
+
             private boolean signInUsr(User user) {
                 try{
                     sqldb=new DBHelper(MainActivity.this);

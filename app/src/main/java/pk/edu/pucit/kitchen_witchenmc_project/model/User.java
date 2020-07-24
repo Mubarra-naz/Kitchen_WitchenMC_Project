@@ -1,15 +1,9 @@
 package pk.edu.pucit.kitchen_witchenmc_project.model;
 
 public class User {
-    private int id;
     private String name;
     private String mail;
     private String password;
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public User(){
 
     }
@@ -18,14 +12,11 @@ public class User {
         mail=usrMail;
         password=usrPass;
     }
+
     public User(String mail, String pass) {
         this.mail=mail;
         password=pass;
         name=null;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getMail() {
