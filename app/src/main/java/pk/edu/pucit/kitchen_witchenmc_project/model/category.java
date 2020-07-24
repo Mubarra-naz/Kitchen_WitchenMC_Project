@@ -5,11 +5,8 @@ public class category {
     private String img;
 
     public category() {
-<<<<<<< HEAD
-=======
         name=null;
         img=null;
->>>>>>> master
     }
 
     public category(String name, String img) {

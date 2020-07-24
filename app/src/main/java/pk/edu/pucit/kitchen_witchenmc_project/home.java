@@ -82,7 +82,7 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
     }
     private void loadCat() {
         ArrayList<category> cat_list=new ArrayList<>();
-        cat_list= db.loadCategories();
+        cat_list.addAll(db.loadCategories());
         //take category data from db and send to menuRViewAdapter defined below
         catRViewAdapter adapter=new catRViewAdapter(this, cat_list);
         menu_recycler.setAdapter(adapter);
