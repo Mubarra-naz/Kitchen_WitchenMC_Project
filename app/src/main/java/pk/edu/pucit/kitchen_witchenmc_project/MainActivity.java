@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     TextView signUpLnk;
     String email, passw;
     DBHelper sqldb;
+
     ProgressDialog sDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         signUpLnk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent signUp=new Intent(MainActivity.this,signUp.class);
                 startActivity(signUp);
             }
@@ -55,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
                     sDialog.setMessage("Signing In, Please Wait!");
                     sDialog.show();
                     User user= new User(email, passw);
+
                     boolean login=signInUsr(user);
                     sDialog.dismiss();
                     clearForm();
@@ -62,11 +65,19 @@ public class MainActivity extends AppCompatActivity {
                         user.setName(sqldb.getUserName(user.getMail()));
                         //go to home
                     }
+                    //boolean login=signInUsr(user);
+                    clearForm();
+                    user.setName("Ali");
+                    Intent homeIntent= new Intent(MainActivity.this, home.class);
+                    homeIntent.putExtra("username",user.getName());
+                    startActivity(homeIntent);
+                    sDialog.dismiss();
+                    finish();
+                    //else for user existence
                 }
 
 
             }
-
             private boolean signInUsr(User user) {
                 try{
                     sqldb=new DBHelper(MainActivity.this);

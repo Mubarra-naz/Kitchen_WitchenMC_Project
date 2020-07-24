@@ -12,7 +12,6 @@ public class User {
         mail=usrMail;
         password=usrPass;
     }
-
     public User(String mail, String pass) {
         this.mail=mail;
         password=pass;
